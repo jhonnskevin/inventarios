@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="light" data-toggled="close">
+<html lang="es" dir="ltr" data-nav-layout="vertical" data-theme-mode="light" data-header-styles="light" data-menu-styles="light" data-toggled="close">
 
 <head>
 
@@ -8,7 +8,7 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title> Sash – Bootstrap 5  Admin &amp; Dashboard Template </title>
+    <title> Inventario </title>
     <meta name="Description" content="Bootstrap Responsive Admin Web Dashboard HTML5 Template">
     <meta name="Author" content="Spruko Technologies Private Limited">
 	<meta name="keywords" content="admin dashboard,dashboard design htmlbootstrap admin template,html admin panel,admin dashboard html,admin panel html template,bootstrap dashboard,html admin template,html dashboard,html admin dashboard template,bootstrap dashboard template,dashboard html template,bootstrap admin panel,dashboard admin bootstrap,bootstrap admin dashboard">
@@ -609,7 +609,7 @@
                     <!-- End::header-element -->
 
                     <!-- Start::header-element -->
-                    <div class="header-element country-selector">
+                    <div class="header-element country-selector d-none">
                         <!-- Start::header-link|dropdown-toggle -->
                         <a href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-auto-close="outside" data-bs-toggle="dropdown">
                             <img src="{{ asset('assets/images/flags/us_flag.jpg') }}" alt="img" class="rounded-circle">
@@ -1078,7 +1078,7 @@
                     <!-- End::header-element -->
 
                     <!-- Start::header-element -->
-                    <div class="header-element">
+                    <div class="header-element d-none">
                         <!-- Start::header-link|dropdown-toggle -->
                         <a aria-label="anchor" href="javascript:void(0);" class="header-link dropdown-toggle" data-bs-toggle="offcanvas" data-bs-target="#sidebar-right">
                             <i class="fe fe-align-right header-link-icon"></i>
@@ -1096,8 +1096,8 @@
                                     <img src="{{ asset('assets/images/faces/9.jpg') }}" alt="img" width="32" height="32" class="rounded-circle">
                                 </div>
                                 <div class="d-xxl-block d-none my-auto">
-                                    <h6 class="fw-semibold mb-0 lh-1 fs-14">Json Taylor</h6>
-                                    <span class="op-7 fw-normal d-block fs-11 text-muted">Web Designer</span>
+                                    <h6 class="fw-semibold mb-0 lh-1 fs-14">{{ Auth::user()->name }}</h6>
+                                    <span class="op-7 fw-normal d-block fs-11 text-muted">{{ Auth::user()->email }}</span>
                                 </div>
                             </div>
                         </a>
@@ -1105,8 +1105,8 @@
                         <ul class="main-header-dropdown dropdown-menu pt-0 header-profile-dropdown dropdown-menu-end" aria-labelledby="mainHeaderProfile">
                             <li class="drop-heading d-xxl-none d-block">
                                  <div class="text-center">
-                                    <h5 class="text-dark mb-0 fs-14 fw-semibold">Json Taylor</h5>
-                                    <small class="text-muted">Web Designer</small>
+                                    <h5 class="text-dark mb-0 fs-14 fw-semibold">{{ Auth::user()->name }}</h5>
+                                    <small class="text-muted">{{ Auth::user()->email }}</small>
                                 </div>
                             </li>
                             <li class="dropdown-item"><a class="d-flex w-100" href="profile.html"><i class="fe fe-user fs-18 me-2 text-primary"></i>Profile</a></li>
@@ -1114,13 +1114,24 @@
                             <li class="dropdown-item"><a class="d-flex w-100" href="mail-settings.html"><i class="fe fe-settings fs-18 me-2 text-primary"></i>Settings</a></li>
                             <li class="dropdown-item"><a class="d-flex w-100" href="chat.html"><i class="fe fe-headphones fs-18 me-2 text-primary"></i>Support</a></li>
                             <li class="dropdown-item"><a class="d-flex w-100" href="lockscreen.html"><i class="fe fe-lock fs-18 me-2 text-primary"></i>Lockscreen</a></li>
-                            <li class="dropdown-item"><a class="d-flex w-100" href="sign-in.html"><i class="fe fe-info fs-18 me-2 text-primary"></i>Log Out</a></li>
+                            <li class="dropdown-item">
+                                <!-- Cerrar sesión -->
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <a class="d-flex w-100" href="route('logout')"
+                                            onclick="event.preventDefault();
+                                                        this.closest('form').submit();">
+                                                        <i class="fe fe-info fs-18 me-2 text-primary"></i>
+                                        Cerrar sesión
+                                    </a>
+                                </form>
+                            </li>
                         </ul>
                     </div>
                     <!-- End::header-element -->
 
                     <!-- Start::header-element -->
-                    <div class="header-element">
+                    <div class="header-element d-none">
                         <!-- Start::header-link|switcher-icon -->
                         <a aria-label="anchor" href="#" class="header-link switcher-icon" data-bs-toggle="offcanvas" data-bs-target="#switcher-canvas">
                             <i class="bx bx-cog header-link-icon"></i>
@@ -1891,18 +1902,27 @@
 
                 <!-- PAGE-HEADER -->
                 <div class="page-header">
-                  <h1 class="page-title my-auto">Empty</h1>
-                  <div>
+                    <h1 class="page-title my-auto">@yield('page-title', 'Bienvenido')</h1>
+                    <div>
                     <ol class="breadcrumb mb-0">
-                      <li class="breadcrumb-item">
-                        <a href="javascript:void(0)">Pages</a>
-                      </li>
-                      <li class="breadcrumb-item active" aria-current="page">Empty</li>
+                        @if(isset($breadcrumbs) && count($breadcrumbs) > 0)
+                            @foreach($breadcrumbs as $breadcrumb)
+                                <li class="breadcrumb-item {{ $loop->last ? 'active' : '' }}"
+                                    aria-current="{{ $loop->last ? 'page' : '' }}">
+                                    @if(!$loop->last)
+                                        <a href="{{ $breadcrumb['url'] }}">{{ $breadcrumb['name'] }}</a>
+                                    @else
+                                        {{ $breadcrumb['name'] }}
+                                    @endif
+                                </li>
+                            @endforeach
+                        @else
+                            <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                        @endif
                     </ol>
-                  </div>
+                    </div>
                 </div>
                 <!-- PAGE-HEADER END -->
-
 
                 <!-- Start::row-1 -->
                 <div class="row">
@@ -2392,12 +2412,10 @@
         <footer class="footer mt-auto py-3 text-center">
             <div class="container">
                 <span class=""> Copyright © <span id="year"></span> <a
-                        href="javascript:void(0);" class="text-primary">Sash</a>.
-                    Designed with <span class="bi bi-heart-fill text-danger"></span> by <a href="javascript:void(0);">
-                        <span class="text-primary">Spruko</span>
-                    </a> All
-                    rights
-                    reserved
+                        href="javascript:void(0);" class="text-primary">Inventario</a>.
+                    Desarrollador por  <a href="javascript:void(0);">
+                        <span class="text-primary">Ing. Kevin Crespo</span>
+                    </a> Todos los derechos reservados
                 </span>
             </div>
         </footer>
