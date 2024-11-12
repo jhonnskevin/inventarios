@@ -12,31 +12,56 @@
                 <p class="h5 fw-semibold mb-2 text-center">Inventario</p>
                 <p class="mb-4 text-muted op-7 fw-normal text-center">Bienvenido y únete a nosotras creando una cuenta gratuita!</p>
                 <div class="row gy-3">
-                    <div class="col-xl-12">
-                        <label for="signup-firstname" class="form-label text-default">Nombre</label>
-                        <input type="text" class="form-control form-control-lg" id="signup-firstname" placeholder="Ingrese nombre">
-                    </div>
-                    <div class="col-xl-12">
-                        <label for="signup-lastname" class="form-label text-default">Correo electrónico</label>
-                        <input type="email" class="form-control form-control-lg" id="signup-lastname" placeholder="Ingrese correo electrónico">
-                    </div>
-                    <div class="col-xl-12">
-                        <label for="signup-password" class="form-label text-default">Contraseña</label>
-                        <div class="input-group">
-                            <input type="password" class="form-control form-control-lg" id="signup-password" placeholder="Ingrese contraseña">
-                            <button aria-label="button" class="btn btn-light" onclick="createpassword('signup-password',this)" type="button" id="button-addon2"><i class="ri-eye-off-line align-middle"></i></button>
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
+
+                        <!-- Nombre -->
+                        <div class="col-xl-12 mb-3">
+                            <label for="name" class="form-label text-default">Nombre</label>
+                            <input type="text" class="form-control form-control-lg" id="name" name="name" value="{{ old('name') }}" placeholder="Ingrese nombre">
+                            @error('name')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                    </div>
-                    <div class="col-xl-12 mb-2">
-                        <label for="signup-confirmpassword" class="form-label text-default">Confirmar contraseña</label>
-                        <div class="input-group">
-                            <input type="password" class="form-control form-control-lg" id="signup-confirmpassword" placeholder="Ingrese contraseña nuevamente">
-                            <button aria-label="button" class="btn btn-light" onclick="createpassword('signup-confirmpassword',this)" type="button" id="button-addon21"><i class="ri-eye-off-line align-middle"></i></button>
+
+                        <!-- Correo electrónico -->
+                        <div class="col-xl-12 mb-3">
+                            <label for="email" class="form-label text-default">Correo electrónico</label>
+                            <input type="email" class="form-control form-control-lg" id="email" name="email" value="{{ old('email') }}" placeholder="Ingrese correo electrónico">
+                            @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
                         </div>
-                    </div>
-                    <div class="col-xl-12 d-grid mt-2">
-                        <button type="button" class="btn btn-lg btn-primary">Crear cuenta</button>
-                    </div>
+
+                        <!-- Constraseña -->
+                        <div class="col-xl-12 mb-3">
+                            <label for="password" class="form-label text-default">Contraseña</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control form-control-lg" id="password" name="password" placeholder="Ingrese contraseña">
+                                <button aria-label="button" class="btn btn-light" onclick="createpassword('password',this)" type="button" id="button-addon2"><i class="ri-eye-off-line align-middle"></i></button>
+                            </div>
+                            @error('password')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Confirmar Constraseña -->
+                        <div class="col-xl-12 mb-3">
+                            <label for="password_confirmation" class="form-label text-default">Confirmar contraseña</label>
+                            <div class="input-group">
+                                <input type="password" class="form-control form-control-lg" id="password_confirmation" name="password_confirmation" placeholder="Ingrese contraseña nuevamente">
+                                <button aria-label="button" class="btn btn-light" onclick="createpassword('password_confirmation',this)" type="button" id="button-addon21"><i class="ri-eye-off-line align-middle"></i></button>
+                            </div>
+                            @error('password_confirmation')
+                                <div class="text-danger">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="col-xl-12 d-grid mt-2">
+                            <button type="submit" class="btn btn-lg btn-primary">Crear cuenta</button>
+                        </div>
+                    </form>
+
                 </div>
                 <div class="text-center">
                     <p class="text-muted mt-3">Ya tienes una cuenta? <a href="{{ route('login') }}" class="text-primary">Ingresar</a></p>
