@@ -1189,14 +1189,14 @@
                         <li class="slide__category"><span class="category-name">DIRECTORIO</span></li>
 
                         <li class="slide">
-                            <a href="#" class="side-menu__item">
+                            <a href="{{ route('users.index') }}" class="side-menu__item">
                                 <i class="fe fe-users side-menu__icon"></i>
                                 <span class="side-menu__label">Usuarios</span>
                             </a>
                         </li>
 
                         <li class="slide">
-                            <a href="#" class="side-menu__item">
+                            <a href="{{ route('personas.index') }}" class="side-menu__item">
                                 <i class="fe fe-users side-menu__icon"></i>
                                 <span class="side-menu__label">Personas</span>
                             </a>
@@ -1207,7 +1207,7 @@
                         <li class="slide__category"><span class="category-name">ADMINISTRACIÓN</span></li>
 
                         <li class="slide">
-                            <a href="#" class="side-menu__item">
+                            <a href="{{ route('categorias.index') }}" class="side-menu__item">
                                 <i class="fe fe-layers side-menu__icon"></i>
                                 <span class="side-menu__label">Categorías</span>
                             </a>
@@ -1303,11 +1303,7 @@
                 </div>
                 <!-- PAGE-HEADER END -->
 
-                <!-- Start::row-1 -->
-                <div class="row">
-
-                </div>
-                <!--End::row-1 -->
+                @yield('contenido')
 
             </div>
         </div>
