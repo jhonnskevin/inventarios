@@ -43,7 +43,46 @@
 
     <!-- Choices Css -->
     <link rel="stylesheet" href="{{ asset('assets/libs/choices.js/public/assets/styles/choices.min.css') }}">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet">
 
+ <!-- Jsvector Css -->
+<link rel="stylesheet" href="{{ asset('assets/libs/jsvectormap/css/jsvectormap.min.css') }}">
+
+ <!-- Swiper Css -->
+<link rel="stylesheet" href="{{ asset('assets/libs/swiper/swiper-bundle.min.css') }}">
+
+ <!-- Grid Css -->
+<link rel="stylesheet" href="{{ asset('assets/libs/gridjs/theme/mermaid.min.css') }}">
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.3.0/css/responsive.bootstrap.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.bootstrap5.min.css">
+
+<!-- Sweetalerts CSS -->
+<link rel="stylesheet" href="{{ asset('assets/libs/sweetalert2/sweetalert2.min.css') }}">
+
+<style>
+    /* Mantener el color de fondo gris */
+.readonly-input {
+    background-color: #e2e8f0; /* Color gris claro */
+    cursor: not-allowed; /* Muestra el cursor como si estuviera deshabilitado */
+}
+
+/* Evitar que el campo cambie de color cuando se enfoca */
+.readonly-input:focus {
+    background-color: #e2e8f0; /* Mantener el color de fondo */
+    outline: none; /* Evita el borde de foco */
+    box-shadow: none; /* Evita el efecto de sombra al hacer foco */
+}
+
+.swal2-title {
+   font-size: 1.5rem !important /* Tamaño del título font-size: 2rem;*/
+}
+
+.swal2-html-container {
+  font-size: 1rem !important /* Tamaño del texto */
+}
+</style>
 </head>
 
 <body>
@@ -1214,21 +1253,21 @@
                         </li>
 
                         <li class="slide">
-                            <a href="#" class="side-menu__item">
+                            <a href="{{ route('tipos.index') }}" class="side-menu__item">
                                 <i class="fe fe-tag side-menu__icon"></i>
                                 <span class="side-menu__label">Tipos</span>
                             </a>
                         </li>
 
                         <li class="slide">
-                            <a href="#" class="side-menu__item">
+                            <a href="{{ route('laboratorios.index') }}" class="side-menu__item">
                                 <i class="fe fe-list side-menu__icon"></i>
                                 <span class="side-menu__label">Laboratorios</span>
                             </a>
                         </li>
 
                         <li class="slide">
-                            <a href="#" class="side-menu__item">
+                            <a href="{{ route('productos.index') }}" class="side-menu__item">
                                 <i class="fe fe-package side-menu__icon"></i>
                                 <span class="side-menu__label">Productos</span>
                             </a>
@@ -1239,14 +1278,14 @@
                         <li class="slide__category"><span class="category-name">TRANSACCIONES</span></li>
 
                         <li class="slide">
-                            <a href="#" class="side-menu__item">
+                            <a href="{{ route('transacciones.entradas.index') }}" class="side-menu__item">
                                 <i class="fe fe-arrow-down  side-menu__icon"></i>
                                 <span class="side-menu__label">Entradas</span>
                             </a>
                         </li>
 
                         <li class="slide">
-                            <a href="#" class="side-menu__item">
+                            <a href="{{ route('transacciones.salidas.index') }}" class="side-menu__item">
                                 <i class="fe fe-arrow-up side-menu__icon"></i>
                                 <span class="side-menu__label">Salidas</span>
                             </a>
@@ -1821,20 +1860,58 @@
     <!-- Sticky JS -->
     <script src="{{ asset('assets/js/sticky.js') }}"></script>
 
-    <!-- Simplebar JS -->
-    <script src="{{ asset('assets/libs/simplebar/simplebar.min.js') }}"></script>
-    <script src="{{ asset('assets/js/simplebar.js') }}"></script>
-
     <!-- Color Picker JS -->
     <script src="{{ asset('assets/libs/@simonwep/pickr/pickr.es5.min.js') }}"></script>
 
+    <!-- JSVector Maps JS -->
+    <script src="{{ asset('assets/libs/jsvectormap/js/jsvectormap.min.js') }}"></script>
 
+    <!-- JSVector Maps MapsJS -->
+    <script src="{{ asset('assets/libs/jsvectormap/maps/world-merc.js') }}"></script>
+
+    <!-- Apex Charts JS -->
+    <script src="{{ asset('assets/libs/apexcharts/apexcharts.min.js') }}"></script>
+
+    <!-- Chartjs Chart JS -->
+    <script src="{{ asset('assets/libs/chart.js/chart.min.js') }}"></script>
 
     <!-- Custom-Switcher JS -->
     <script src="{{ asset('assets/js/custom-switcher.min.js') }}"></script>
 
+    <!-- Sweetalerts JS -->
+    <script src="{{ asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
+    <script src="{{ asset('assets/js/sweet-alerts.js') }}"></script>
+
     <!-- Custom JS -->
     <script src="{{ asset('assets/js/custom.js') }}"></script>
+
+    <!-- Jquery Cdn -->
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+
+    <!-- Datatables Cdn -->
+    <!--<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>-->
+    <script src="{{ asset('assets/libs/datatables.net-bs5/js/jquery.dataTables.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.3.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.6/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
+    <!-- Internal Datatables JS -->
+    <script src="{{ asset('assets/js/datatables.js') }}"></script>
+
+    <!-- Select2 Cdn -->
+    <!--<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>-->
+    <script src="{{ asset('assets/js/select2.min.js') }}"></script>
+
+    <!-- Internal Select-2.js -->
+    <script src="{{ asset('assets/js/select2.js') }}"></script>
+
+    @yield('script')
 
 </body>
 
